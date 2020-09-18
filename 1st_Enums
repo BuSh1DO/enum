@@ -1,0 +1,37 @@
+nmap -sV -p- XXXX
+nmap XXXX -T4 --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit --open -oN Quick_XXXXXX
+
+nmap XXXX -p- --max-retries 1 --max-rate 500 --max-scan-delay 20 -T4 -v -oN nmap/Full_XXXXXX
+
+nmap XXXX -sV --script vulners --script-args mincvss=7.0 -pY -oN nmap/CVEs_XXXXX
+nmap XXXX -sV --script vuln -pY -oN nmap/Vulns_XXXXX.nmap XXXXX
+
+
+gobuster dir -w /usr/share/wordlists/dirb/common.txt -l -t 40 -e -k -s 200,204,301,302,307 -u http://10.10.10.198:8080
+
+
+
+sslscan  XXXX
+
+gobuster dir -w /usr/share/wordlists/dirb/common.txt -l -t 30 -e -k -x $pages -u https:// XXXX: Y -o recon/gobuster_ XXXX_ Y.txt"
+nikto -host https:// XXXX: Y -ssl | tee recon/nikto_ XXXX_ Y.txt"
+
+joomscan --url  XXXX: Y | tee recon/joomscan_ XXXX_ Y.txt
+
+wpscan --url  XXXX: Y --enumerate p | tee recon/wpscan_ XXXX_ Y.txt
+
+droopescan scan drupal -u  XXXX: Y | tee recon/droopescan_ XXXX_ Y.txt
+
+smbmap -H  XXXX
+smbclient -L \"//XXXX/\" -U \"guest\"% 
+nmap -Pn -p445 --script vuln -oN recon/SMB_vulns_ XXXX.txt 
+enum4linux -a  XXXX | tee recon/enum4linux_ XXXX.txt
+
+
+snmp-check  XXXX -c public | tee recon/snmpcheck_ XXXX.txt
+
+dnsrecon -r $subnet/24 -n  XXXX
+
+
+
+https://snovvcrash.rocks/cheatsheets/
